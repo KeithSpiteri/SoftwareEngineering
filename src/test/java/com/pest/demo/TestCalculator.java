@@ -21,12 +21,12 @@ public class TestCalculator {
 	
 	@Test
 	public void testAddNegativeNumbers() {
-		assertEquals(-6, calc.add(-3, -3));
+		assertEquals(-6, calc.add(-5, -3));
 	}
 	
 	@Test
 	public void testSubtraction() {
-		assertEquals(5, calc.divide(25, 5));
+		assertEquals(5, calc.divide(25, 10));
 	}
 
 }
