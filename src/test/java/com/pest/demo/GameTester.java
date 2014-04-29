@@ -67,6 +67,7 @@ public class GameTester {
 	@Test
 	public void generateHTMLTest() throws IOException {
 		mygame = new Game();
+		Game.main();
 		Game.num_play=2;
 		map = new Map();
 		map.size = 5;
