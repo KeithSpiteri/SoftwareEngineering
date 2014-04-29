@@ -49,6 +49,12 @@ public class GameTester {
 		assertEquals(false, mygame.setNumPlayers(1));
 	}
 
+	@Test 
+	public void testMain()
+	{
+		Game.main();
+	}
+	
 	@Test
 	public void testStart()
 	{
