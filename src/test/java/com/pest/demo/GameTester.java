@@ -54,12 +54,12 @@ public class GameTester {
 	{
 		Game.testing = true;
 		Game.num_play = 2;
-		
-		
-		
-		Game game= new Game();
-		game.startGame();
 		game.map.setMapSize(5, 5);
+		Game.main();
+		
+		//Game game= new Game();
+		//game.startGame();
+		
 
 
 	}
@@ -67,7 +67,6 @@ public class GameTester {
 	@Test
 	public void generateHTMLTest() throws IOException {
 		mygame = new Game();
-		Game.main();
 		Game.num_play=2;
 		map = new Map();
 		map.size = 5;
