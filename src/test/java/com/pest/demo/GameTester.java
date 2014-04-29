@@ -52,6 +52,7 @@ public class GameTester {
 	@Test 
 	public void testMain()
 	{
+		Game.testing = true;
 		Game.main();
 	}
 	
