@@ -14,11 +14,13 @@ public class Game {
 	static Game g;
 	Player[] players;
 
-	public static void main(String args[])
+	public static void main()
 	{
-		g = new Game();
-		g.startGame();
-		g.generateHTMLFiles();
+		if(!testing){
+
+			g = new Game();
+			g.startGame();
+		}
 	}
 
 	void startGame()
