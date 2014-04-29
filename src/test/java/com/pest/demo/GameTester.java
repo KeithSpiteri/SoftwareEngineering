@@ -54,12 +54,9 @@ public class GameTester {
 	{
 		Game.testing = true;
 		Game.num_play = 2;
+		Game game= new Game();
+		game.startGame();
 		game.map.setMapSize(5, 5);
-		Game.main();
-		
-		//Game game= new Game();
-		//game.startGame();
-		
 
 
 	}
