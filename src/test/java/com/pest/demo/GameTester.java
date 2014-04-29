@@ -70,13 +70,13 @@ public class GameTester {
 		Game.num_play=2;
 		map = new Map();
 		map.size = 5;
-		map.generate();
+		//map.generate();
 		
 		mygame.players = new Player[2];
 		mygame.players[0] = new Player();
-		mygame.players[0].setFixedStart(map.size);
+		mygame.players[0].setFixedStart(2);
 		mygame.players[1] = new Player();
-		mygame.players[1].setFixedStart(map.size);
+		mygame.players[1].setFixedStart(2);
 
 
 		for(int i = 0; i<Map.grid.length; i++)
@@ -89,7 +89,6 @@ public class GameTester {
 
 		for (int i=0; i < mygame.players.length; i++)
 		{
-			mygame.players[i].setFixedStart(2);
 			Map.grid[mygame.players[i].position.x][mygame.players[i].position.y-1] = Color.BLUE;
 			mygame.players[i].move('u');
 			Map.grid[mygame.players[i].position.x+1][mygame.players[i].position.y] = Color.GREEN;
