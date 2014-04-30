@@ -9,7 +9,6 @@ public class Game {
 
 	static int num_play;
 
-	int turns;
 	Map map;
 	static Game g;
 	Player[] players;
@@ -17,7 +16,6 @@ public class Game {
 	public static void main()
 	{
 		if(!testing){
-
 			g = new Game();
 			g.startGame();
 		}
@@ -27,10 +25,10 @@ public class Game {
 	{
 
 		Scanner sc = new Scanner(System.in);
-		map = new Map();
-		int map_size;
 
 		if(!testing){
+			map = new Map();
+			int map_size;
 			do
 			{	
 				System.out.print("Enter number of players (2-8): ");
@@ -47,9 +45,8 @@ public class Game {
 
 				map_size = sc.nextInt();
 			}while(!map.setMapSize(map_size, map_size));
+			map.generate();
 		}
-
-		//map.generate();
 
 		players = new Player[num_play];
 
@@ -62,30 +59,30 @@ public class Game {
 
 		//Starting Game Loop
 
-		if(!testing){
-			char move = 'a';
-			int wins;
-			do{
-				wins = 0;
-				for(int i=0; i<players.length; i++)
-				{
-					if(!players[i].reached_end){
-						do {
-							System.out.print("Player " + (i+1) + " choose a direction (U, D, L, R): ");
-							if(!testing)
-								move = sc.next().charAt(0); 
-							else
-								move='U';
-							System.out.println();
-						} while (!players[i].move(move) && !testing);
-					}else
-						wins++;
-					generateHTMLFiles();
-				}
-			}while(wins < players.length);
+		char move = 'a';
+		int wins;
+		do{
+			wins = 0;
+			for(int i=0; i<players.length; i++)
+			{
+				if(!players[i].reached_end && !testing){
 
-			System.out.println("Congratulations ! All players have found the Ruby");
-		}
+					do {
+						System.out.print("Player " + (i+1) + " choose a direction (U, D, L, R): ");
+						if(!testing)
+							move = sc.next().charAt(0); 
+						else
+							move='U';
+						System.out.println();
+					} while (!players[i].move(move) && !testing);
+				}else
+					wins++;
+				generateHTMLFiles();
+			}
+		}while(wins < players.length);
+
+		System.out.println("Congratulations ! All players have found the Ruby");
+
 		sc.close();
 
 	}
@@ -155,9 +152,7 @@ public class Game {
 				writer.close();
 			}
 
-		}catch(Exception ex){
-			System.out.println("ERROR");
-		}
+		}catch(Exception ex){}
 	}
 
 

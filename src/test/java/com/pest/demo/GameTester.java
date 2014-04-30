@@ -62,9 +62,11 @@ public class GameTester {
 		Game.testing = true;
 		Game.num_play = 2;
 		Game game= new Game();
-		game.startGame();
+		game.map = new Map();
 		game.map.setMapSize(5, 5);
-
+		game.map.generate();
+		game.startGame();
+		Game.testing = false;
 
 	}
 
@@ -72,8 +74,8 @@ public class GameTester {
 	public void generateHTMLTest() throws IOException {
 		mygame = new Game();
 		Game.num_play=2;
-		map = new Map();
-		map.size = 5;
+		mygame.map = new Map();
+		mygame.map.size = 5;
 		//map.generate();
 		
 		mygame.players = new Player[2];
@@ -87,7 +89,7 @@ public class GameTester {
 		{
 			for(int j = 0; j < Map.grid.length; j++)
 			{
-				Map.grid[i][j] = Color.GREEN;
+				mygame.map.grid[i][j] = Color.GREEN;
 			}
 		}
 
@@ -103,8 +105,6 @@ public class GameTester {
 		
 		
 
-		
-		map.generate();
 		mygame.generateHTMLFiles();
 
 		File file1 = new File("map_player_1.html");
