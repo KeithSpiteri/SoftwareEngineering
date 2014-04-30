@@ -174,7 +174,6 @@ public class Tester {
 	Game mygame = null;
 	Map map = null;
 	
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
 	@Before
 	public void setUp() throws Exception {
@@ -189,10 +188,6 @@ public class Tester {
 		
 	}
 
-	@Before
-	public void setUpStreams() {
-		System.setOut(new PrintStream(outContent));
-	}
 
 
 	@Test
@@ -219,6 +214,7 @@ public class Tester {
 		Game.num_play = 2;
 		Game game= new Game();
 		game.map = new Map();
+		game.map.testing = true;
 		game.map.setMapSize(5, 5);
 		game.map.generate();
 		game.startGame();
@@ -268,9 +264,5 @@ public class Tester {
 		assertEquals(file1, file2);		 
 	}
 	
-	@After
-	public void cleanUpStreams() {
-		System.setOut(null);
-	}
 
 }
