@@ -20,6 +20,7 @@ public class PlayTest {
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
+		m.testing = true;
 		m.size = 5;
 		m.setMapSize(5, 5);
 		m.generate();

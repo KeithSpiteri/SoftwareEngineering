@@ -3,6 +3,7 @@ import java.awt.*;
 public class Map {
 
 	int size;
+	boolean testing = false;
 
 	static Color grid[][];
 
@@ -33,6 +34,9 @@ public class Map {
 			for(int j = 0; j < size; j++)
 			{
 				chance = 0 + (int)(Math.random()*100);
+				if(testing)
+					chance = 100;
+
 				if(chance < 25)
 				{
 					grid[i][j] = Color.BLUE;
@@ -44,11 +48,9 @@ public class Map {
 		int water_cell_x;
 		int water_cell_y;
 
-		do{
-			water_cell_x = 0+ (int)(Math.random()*size); 
-			water_cell_y = 0+ (int)(Math.random()*size); 
-		}while(grid[water_cell_x][water_cell_y] != Color.BLUE);
-		
+		water_cell_x = 0+ (int)(Math.random()*size); 
+		water_cell_y = 0+ (int)(Math.random()*size); 
+
 		grid[water_cell_x][water_cell_y] = Color.YELLOW;
 
 	}
