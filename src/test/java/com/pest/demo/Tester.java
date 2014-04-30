@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class PlayTest {
+public class Tester {
 
 	Player p;
 	Map m;
@@ -28,14 +28,16 @@ public class PlayTest {
 		g.setNumPlayers(4);
 		m.testing = true;
 		m.size = 5;
-		m.setMapSize(5, 5);
-		m.generate();
+		assertEquals(true, m.setMapSize(5, 5));
+		assertEquals(true, m.generate());
 	}
 	
 	@Test
 	public void startTest()
 	{
-		p.setStartPosition(5);
+		assertEquals(true, p.setStartPosition(5));
+		assertEquals(false, p.setStartPosition(55));
+		assertEquals(false, p.setStartPosition(4));
 	}
 	
 	@Test
@@ -43,7 +45,7 @@ public class PlayTest {
 	{
 		Position pos = new Position(0,0);
 		Map.grid[0][0] = Color.YELLOW;
-		p.setPosition(pos);
+		assertEquals(true, p.setPosition(pos));
 	}
 	
 	@Test
@@ -52,46 +54,46 @@ public class PlayTest {
 		p.setFixedStart(2);
 		//p.start_pos = new Position(2,2);
 		p.reset =false;
-		p.move('U');
+		assertEquals(true, p.move('U'));
 		p.reset =true;
 		p.move('U');
 		Position newP = new Position(0,0);
 		p.position = newP;
-		p.move('U');
+		assertEquals(false, p.move('U'));
 
 		
 		//p.setStartPosition(5);
 		p.setFixedStart(2);
 		//p.start_pos = new Position(2,2);
 		p.reset =false;
-		p.move('L');
+		assertEquals(true, p.move('L'));
 		p.reset =true;
 		p.move('L');
 		newP = new Position(0,0);
 		p.position = newP;
-		p.move('L');
+		assertEquals(false, p.move('L'));
 		
 		//p.setStartPosition(5);
 		p.setFixedStart(2);
 		//p.start_pos = new Position(2,2);
 		p.reset =false;
-		p.move('R');
+		assertEquals(true, p.move('R'));
 		p.reset =true;
 		p.move('R');
 		newP = new Position(4,0);
 		p.position = newP;
-		p.move('R');
+		assertEquals(false, p.move('R'));
 		
 		//p.setStartPosition(5);
 		p.setFixedStart(2);
 		//p.start_pos = new Position(2,2);
 		p.reset =false;
-		p.move('D');
+		assertEquals(true, p.move('D'));
 		p.reset =true;
 		p.move('D');
 		newP = new Position(0,4);
 		p.position = newP;
-		p.move('D');
+		assertEquals(false, p.move('D'));
 	}
 	
 	@Test
@@ -181,8 +183,8 @@ public class PlayTest {
 		mygame.setNumPlayers(4);
 		map = new Map();
 		map.testing = true;
-		map.setMapSize(5, 5);
-		map.generate();
+		assertEquals(true, map.setMapSize(5, 5));
+		assertEquals(true, map.generate());
 
 		
 	}
@@ -221,7 +223,6 @@ public class PlayTest {
 		game.map.generate();
 		game.startGame();
 		Game.testing = false;
-
 	}
 
 	@Test
@@ -243,7 +244,7 @@ public class PlayTest {
 		{
 			for(int j = 0; j < Map.grid.length; j++)
 			{
-				mygame.map.grid[i][j] = Color.GREEN;
+				Map.grid[i][j] = Color.GREEN;
 			}
 		}
 
@@ -264,9 +265,7 @@ public class PlayTest {
 		File file1 = new File("map_player_1.html");
 		File file2 = new File("map_player_1.html");
 
-		assertEquals(file1, file2);	
-	 
-		 
+		assertEquals(file1, file2);		 
 	}
 	
 	@After
