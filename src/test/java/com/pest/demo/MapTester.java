@@ -19,36 +19,25 @@ public class MapTester {
 	@Test
 	public void setMapSize() 
 	{
+		boolean test = false;
 		Game.num_play = 4;
-		for(int i=4; i<51; i++)
+		for(int i=5; i<51; i++)
 		{
-			m.setMapSize(i, i);
-		}
-
-		Game.num_play = 6;
-		for(int i=4; i<51; i++)
-		{
-			m.setMapSize(i, i);
+			test = m.setMapSize(i, i);
+			assertEquals(true, test);
 		}
 
 		Game.num_play = 8;
-		for(int i=4; i<51; i++)
-		{
-			m.setMapSize(i, i);
-		}
-
-		Game.num_play = 9;
-		for(int i=4; i<51; i++)
-		{
-			m.setMapSize(i, i);
-		}
+		test = m.setMapSize(5, 5);
+		assertEquals(false, test);
+		
 	}
 	
 	@Test
 	public void generate()
 	{
 		m.size = 5;
-		m.generate();
+		assertEquals(true, m.generate());
 	}
 	
 	

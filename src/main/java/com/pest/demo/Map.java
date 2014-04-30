@@ -24,7 +24,7 @@ public class Map {
 		return true;
 	}
 
-	void generate()
+	boolean generate()
 	{
 		int chance = 0; //chance determines probability of water tile
 		grid = new Color[size][size];
@@ -52,7 +52,7 @@ public class Map {
 		water_cell_y = 0+ (int)(Math.random()*size); 
 
 		grid[water_cell_x][water_cell_y] = Color.YELLOW;
-
+		return true;
 	}
 
 

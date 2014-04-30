@@ -36,7 +36,7 @@ public class PlayTest {
 	public void setPos()
 	{
 		Position pos = new Position(0,0);
-		m.grid[0][0] = Color.YELLOW;
+		Map.grid[0][0] = Color.YELLOW;
 		p.setPosition(pos);
 	}
 	
