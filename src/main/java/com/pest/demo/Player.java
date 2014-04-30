@@ -129,8 +129,11 @@ public class Player
 		return position;
 	}
 
-	public void setStartPosition(int length)
+	public boolean setStartPosition(int length)
 	{
+		if(length < 5 || length > 50)
+			return false;
+		
 		int row = 0;
 		int col = 0;
 		Color c = null;
@@ -152,7 +155,7 @@ public class Player
 				visited[i][j] = false;
 		}
 
-
+		return true;
 	}
 	
 	public void setFixedStart(int x)
