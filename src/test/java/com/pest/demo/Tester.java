@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class PlayTest {
+public class Tester {
 
 	Player p;
 	Map m;
@@ -244,7 +244,7 @@ public class PlayTest {
 		{
 			for(int j = 0; j < Map.grid.length; j++)
 			{
-				mygame.map.grid[i][j] = Color.GREEN;
+				Map.grid[i][j] = Color.GREEN;
 			}
 		}
 
