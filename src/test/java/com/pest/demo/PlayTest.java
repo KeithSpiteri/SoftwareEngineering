@@ -22,6 +22,7 @@ public class PlayTest {
 	{
 		p = new Player();
 		m = new Map();
+		m.testing = true;
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
@@ -109,6 +110,7 @@ public class PlayTest {
 	@Before
 	public void beforeMap() {
 		m = new Map();
+		m.testing = true;
 	} 
 
 	@Test
@@ -178,6 +180,7 @@ public class PlayTest {
 		Game.num_play=4;
 		mygame.setNumPlayers(4);
 		map = new Map();
+		map.testing = true;
 		map.setMapSize(5, 5);
 		map.generate();
 
