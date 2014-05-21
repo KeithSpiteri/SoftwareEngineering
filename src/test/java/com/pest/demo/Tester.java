@@ -102,12 +102,6 @@ public class Tester {
 
 	// MAP
 
-	// Map m;
-	@Before
-	public void beforeMap() {
-		m = creator.generate(2, 5);
-		m.testing = true;
-	}
 
 	@Test
 	public void setMapSize() {
@@ -127,6 +121,7 @@ public class Tester {
 	@Test
 	public void generate() {
 		m.size = 5;
+		m = creator.generate(2,5);
 		// assertEquals(true, m.generate());
 	}
 

@@ -6,14 +6,16 @@ public class SafeMap extends Map {
 
 	// Color grid[][];
 
-	public SafeMap(int size) {
+	private SafeMap(int size) {
 		super.size = size;
 		this.generate();
 	}
 
-	/*
-	 * public static Map getInstance() { return new SafeMap(); }
-	 */
+	public static Map getInstance(int size) {
+		if (Map.map == null || !(Map.map instanceof SafeMap))
+			map = new SafeMap(size);
+		return Map.map;
+	}
 
 	public void generate() {
 		grid = new Color[size][size];

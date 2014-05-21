@@ -4,15 +4,17 @@ public class HazardousMap extends Map {
 
 	public int map_type = 2;
 
-	public HazardousMap(int size) {
+	private HazardousMap(int size) {
 		System.out.println("constructing a hazardous map");
 		super.size = size;
 		this.generate();
 	}
 
-	/*
-	 * public static Map getInstance(int size) { return new HazardousMap(); }
-	 */
+	public static Map getInstance(int size) {
+		if (Map.map == null || !(Map.map instanceof HazardousMap))
+			map = new HazardousMap(size);
+		return Map.map;
+	}
 
 	public void generate() {
 		grid = new Color[size][size];
