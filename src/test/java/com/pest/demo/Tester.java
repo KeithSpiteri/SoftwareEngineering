@@ -26,8 +26,9 @@ public class Tester {
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
+		
 		m.setTesting(true);
-		m.setSize(5);
+		m.setSize(5);	
 		assertEquals(true, g.setMapSize(5));
 		// assertEquals(true, g.generate());
 	}
@@ -186,16 +187,22 @@ public class Tester {
 	@Test
 	public void generateHTMLTest() throws IOException {
 		g = new Game();
-		Game.num_play = 2;
+		Game.num_play = 4;
 		g.map = creator.generate(2, 5);
 		// g.map.size = 5;
 		// map.generate();
 
-		g.players = new Player[2];
+		g.players = new Player[4];
 		g.players[0] = new Player(g.map);
 		g.players[0].setFixedStart(2);
 		g.players[1] = new Player(g.map);
 		g.players[1].setFixedStart(2);
+		g.players[2] = new Player(g.map);
+		g.players[2].setFixedStart(2);
+		g.players[3] = new Player(g.map);
+		g.players[3].setFixedStart(2);
+		
+		g.splitTeams(2);
 
 		for (int i = 0; i < Map.grid.length; i++) {
 			for (int j = 0; j < Map.grid.length; j++) {
