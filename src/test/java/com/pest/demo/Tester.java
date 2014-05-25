@@ -22,12 +22,12 @@ public class Tester {
 		creator = new MapCreator();
 		m = creator.generate(1, 5);
 		p = new Player(m);
-		m.testing = true;
+		m.setTesting(true);
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
-		m.testing = true;
-		m.size = 5;
+		m.setTesting(true);
+		m.setSize(5);
 		assertEquals(true, g.setMapSize(5));
 		// assertEquals(true, g.generate());
 	}
@@ -120,7 +120,7 @@ public class Tester {
 
 	@Test
 	public void generate() {
-		m.size = 5;
+		m.setSize(5);
 		m = creator.generate(2,5);
 		// assertEquals(true, m.generate());
 	}
