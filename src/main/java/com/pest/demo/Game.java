@@ -13,6 +13,7 @@ public class Game {
 	MapCreator creator;
 	static Game g;
 	Player[] players;
+	Team[] teams;
 
 	public static void main(String args[]) {
 		System.out.println("Brian's pro version");
@@ -49,16 +50,34 @@ public class Game {
 
 				map_size = sc.nextInt();
 			} while (!setMapSize(map_size));
-			// map.generate();
+
+			char collaborative_op = ' ';
+			do {
+				System.out
+						.println("Would you like to play in collaborative mode? (y/n)");
+				collaborative_op = (char) sc.next().charAt(0);
+			} while (!(collaborative_op == 'y' || collaborative_op == 'Y'
+					|| collaborative_op == 'n' || collaborative_op == 'N'));
+
+			players = new Player[num_play];
+
 			map = creator.generate(map_type, map_size);
-		}
 
-		System.out.println("TIme to create the players");
-		players = new Player[num_play];
+			for (int i = 0; i < num_play; i++) {
+				players[i] = new Player(map);
+				players[i].setStartPosition(map.getSize());
+			}
 
-		for (int i = 0; i < num_play; i++) {
-			players[i] = new Player(map);
-			players[i].setStartPosition(map.size);
+			int number_Of_Teams = 1;
+
+			if (collaborative_op == 'y' || collaborative_op == 'Y') {
+				System.out.println("Enter number of teams");
+				number_Of_Teams = sc.nextInt();
+			}
+			splitTeams(number_Of_Teams);
+			printTeams();
+			// map.generate();
+
 		}
 
 		// Starting Game Loop
@@ -79,6 +98,7 @@ public class Game {
 							move = 'U';
 						System.out.println();
 					} while (!players[i].move(move) && !testing);
+					((Team) players[i].subject).setTeamTrail(players[i].visited);
 				} else
 					wins++;
 				generateHTMLFiles();
@@ -110,6 +130,34 @@ public class Game {
 		}
 		// size = x;
 		return true;
+	}
+
+	void splitTeams(int totTeams) {
+		teams = new Team[totTeams];
+		for (int i = 0; i < totTeams; i++) {
+			teams[i] = new Team();
+		}
+
+		ArrayList<Player> temp = new ArrayList<Player>(Arrays.asList(players));
+		int team = 0;
+
+		while (temp.size() > 0) {
+			int nxtPlayer = (int) (Math.random() * (temp.size() - 1));
+
+			/*
+			 * if (players[nxtPlayer] == null) System.out.println("null");
+			 * 
+			 * if (temp.get(nxtPlayer) == null) System.out.println("null");
+			 */
+
+			teams[team].register(temp.get(nxtPlayer));
+			temp.get(nxtPlayer).setSubject(teams[team]);
+			temp.remove(nxtPlayer);
+
+			team++;
+			if (team == totTeams)
+				team = 0;
+		}
 	}
 
 	void generateHTMLFiles() {
@@ -176,6 +224,18 @@ public class Game {
 			}
 
 		} catch (Exception ex) {
+		}
+	}
+
+	// To
+	// remove####################################################################################################################################################################################################################
+
+	public void printTeams() {
+		int te = 0;
+		for (Team t : teams) {
+			te++;
+			System.out.println("Team " + te + " has " + t.getObservers().size()
+					+ " players!");
 		}
 	}
 

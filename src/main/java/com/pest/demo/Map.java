@@ -3,14 +3,30 @@ import java.awt.Color;
 public abstract class Map {
 
 	public int map_type = 0;
-	int size;
+	public int size;
 
 	protected static Map map = null;
 
-	boolean testing = false;
+	private boolean testing = false;
 
 	public static Color grid[][];
 
 	public void generate() {
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public boolean isTesting() {
+		return testing;
+	}
+
+	public void setTesting(boolean testing) {
+		this.testing = testing;
 	}
 }

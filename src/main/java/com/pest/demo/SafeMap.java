@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 
 public class SafeMap extends Map {
@@ -18,23 +19,23 @@ public class SafeMap extends Map {
 	}
 
 	public void generate() {
-		grid = new Color[size][size];
+		grid = new Color[getSize()][getSize()];
 
 		// set all cells to green by default
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < getSize(); i++) {
+			for (int j = 0; j < getSize(); j++) {
 				grid[i][j] = Color.GREEN;
 			}
 		}
 
-		int total_cells = size * size;
+		int total_cells = getSize() * getSize();
 		int ten_percent = (int) (Math.floor(total_cells / 10));
 
 		int total_water = (int) (Math.random() * ten_percent);
 
 		for (int i = 0; i < total_water; i++) {
-			int x = (int) (Math.random() * size);
-			int y = (int) (Math.random() * size);
+			int x = (int) (Math.random() * getSize());
+			int y = (int) (Math.random() * getSize());
 
 			grid[x][y] = Color.BLUE;
 		}
@@ -42,8 +43,8 @@ public class SafeMap extends Map {
 		int ruby_cell_x;
 		int ruby_cell_y;
 
-		ruby_cell_x = (int) (Math.random() * size);
-		ruby_cell_y = (int) (Math.random() * size);
+		ruby_cell_x = (int) (Math.random() * getSize());
+		ruby_cell_y = (int) (Math.random() * getSize());
 
 		grid[ruby_cell_x][ruby_cell_y] = Color.YELLOW;
 

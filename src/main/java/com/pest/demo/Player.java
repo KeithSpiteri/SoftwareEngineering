@@ -1,15 +1,17 @@
 import java.awt.Color;
 
-public class Player {
+public class Player implements Observer {
 	Position position;
 
 	Position start_pos;
 
-	boolean visited[][];
+	public boolean visited[][];
 
 	boolean reached_end = false;
 
 	boolean reset = false;
+
+	public Subject subject;
 
 	Map map;
 
@@ -88,6 +90,7 @@ public class Player {
 
 		}
 
+		updateTrail(position);
 		return true;
 	}
 
@@ -151,6 +154,23 @@ public class Player {
 			for (int j = 0; j < Map.grid.length; j++)
 				visited[i][j] = false;
 		}
+	}
+
+	public void updateTrail(Position p)
+	{
+		visited[p.getX()][p.getY()] = true;
+	}
+	
+	@Override
+	public void update() {
+		visited = (boolean[][]) subject.getUpdate(this);
+
+	}
+
+	@Override
+	public void setSubject(Subject sub) {
+		this.subject = sub;
+
 	}
 
 }
