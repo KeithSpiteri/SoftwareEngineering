@@ -52,11 +52,11 @@ public class Tester {
 		p.setFixedStart(2);
 		// p.start_pos = new Position(2,2);
 		p.reset = false;
-		assertEquals(true, p.move('U'));
+		assertEquals(true, p.move('U'));	
 		p.reset = true;
 		p.move('U');
 		Position newP = new Position(0, 0);
-		p.position = newP;
+		p.position = newP;		
 		assertEquals(false, p.move('U'));
 
 		// p.setStartPosition(5);
@@ -203,6 +203,8 @@ public class Tester {
 		g.players[3].setFixedStart(2);
 		
 		g.splitTeams(2);
+		
+		assertEquals(g.teams.length,2);
 
 		for (int i = 0; i < Map.grid.length; i++) {
 			for (int j = 0; j < Map.grid.length; j++) {
