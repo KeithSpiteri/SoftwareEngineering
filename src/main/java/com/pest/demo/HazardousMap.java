@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 
 public class HazardousMap extends Map {
@@ -38,10 +37,12 @@ public class HazardousMap extends Map {
 			int x = (int) (Math.random() * getSize());
 			int y = (int) (Math.random() * getSize());
 
-			if (grid[x][y] == Color.BLUE) {
-				i--;
-			} else {
-				grid[x][y] = Color.BLUE;
+			if (testing) {
+				if (grid[x][y] == Color.BLUE) {
+					i--;
+				} else {
+					grid[x][y] = Color.BLUE;
+				}
 			}
 		}
 

@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 
 public class SafeMap extends Map {
@@ -31,7 +30,9 @@ public class SafeMap extends Map {
 		int total_cells = getSize() * getSize();
 		int ten_percent = (int) (Math.floor(total_cells / 10));
 
-		int total_water = (int) (Math.random() * ten_percent);
+		int total_water = (int) (Math.random() * (ten_percent - 1));
+
+		total_water++;
 
 		for (int i = 0; i < total_water; i++) {
 			int x = (int) (Math.random() * getSize());

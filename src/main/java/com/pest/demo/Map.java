@@ -7,7 +7,7 @@ public abstract class Map {
 
 	protected static Map map = null;
 
-	private boolean testing = false;
+	protected boolean testing = false;
 
 	public static Color grid[][];
 
