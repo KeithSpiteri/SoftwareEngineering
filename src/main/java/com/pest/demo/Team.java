@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Team implements Subject {
 
 	private ArrayList<Observer> observers;
-	private boolean[][]visited;
-	private boolean changed;
+	private boolean[][] visited;
+	private boolean moved;
 
 	public Team() {
 		this.observers = new ArrayList<Observer>();
@@ -16,19 +16,18 @@ public class Team implements Subject {
 
 	@Override
 	public void register(Observer obs) {
-		//if (!observers.contains(obs))
-			observers.add(obs);
-
+		observers.add(obs);
+		notifyObservers();
 	}
 
 	@Override
 	public void notifyObservers() {
-		if (changed) {
+		if (moved) {
 			for (Observer obs : observers) {
 				obs.update();
 			}
 
-			this.changed = false;
+			this.moved = false;
 		}
 
 	}
@@ -38,9 +37,9 @@ public class Team implements Subject {
 		return this.visited;
 	}
 
-	public void setTeamTrail(boolean[][] vis) {
+	public void setTeamVisited(boolean[][] vis) {
 		this.visited = vis;
-		this.changed = true;
+		this.moved = true;
 		notifyObservers();
 	}
 
