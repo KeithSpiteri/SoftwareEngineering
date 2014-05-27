@@ -26,11 +26,10 @@ public class Tester {
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
-		
+
 		m.setTesting(true);
-		m.setSize(5);	
+		m.setSize(5);
 		assertEquals(true, g.setMapSize(5));
-		// assertEquals(true, g.generate());
 	}
 
 	@Test
@@ -52,11 +51,11 @@ public class Tester {
 		p.setFixedStart(2);
 		// p.start_pos = new Position(2,2);
 		p.reset = false;
-		assertEquals(true, p.move('U'));	
+		assertEquals(true, p.move('U'));
 		p.reset = true;
 		p.move('U');
 		Position newP = new Position(0, 0);
-		p.position = newP;		
+		p.position = newP;
 		assertEquals(false, p.move('U'));
 
 		// p.setStartPosition(5);
@@ -103,7 +102,6 @@ public class Tester {
 
 	// MAP
 
-
 	@Test
 	public void setMapSize() {
 		boolean test = false;
@@ -122,7 +120,7 @@ public class Tester {
 	@Test
 	public void generate() {
 		m.setSize(5);
-		m = creator.generate(2,5);
+		m = creator.generate(2, 5);
 		// assertEquals(true, m.generate());
 	}
 
@@ -201,10 +199,10 @@ public class Tester {
 		g.players[2].setFixedStart(2);
 		g.players[3] = new Player(g.map);
 		g.players[3].setFixedStart(2);
-		
+
 		g.splitTeams(2);
-		
-		assertEquals(g.teams.length,2);
+
+		assertEquals(g.teams.length, 2);
 
 		for (int i = 0; i < Map.grid.length; i++) {
 			for (int j = 0; j < Map.grid.length; j++) {
@@ -229,4 +227,25 @@ public class Tester {
 		assertEquals(file1, file2);
 	}
 
+	@Test
+	public void teamMove() {
+		g.num_play = 4;
+		
+		g.players = new Player[4];
+		g.players[0] = new Player(g.map);
+		g.players[0].setFixedStart(2);
+		g.players[1] = new Player(g.map);
+		g.players[1].setFixedStart(2);
+		g.players[2] = new Player(g.map);
+		g.players[2].setFixedStart(2);
+		g.players[3] = new Player(g.map);
+		g.players[3].setFixedStart(2);
+		
+		g.splitTeams(2);
+		
+		g.players[0].move('u');
+		
+		((Team)g.players[0].subject).setTeamVisited(g.players[0].visited);
+		
+	}
 }
