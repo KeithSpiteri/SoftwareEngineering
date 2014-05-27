@@ -1,3 +1,5 @@
+package factory;
+
 import java.awt.Color;
 
 public class SafeMap extends Map {

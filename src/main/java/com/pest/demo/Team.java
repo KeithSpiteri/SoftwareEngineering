@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import factory.*;
+import observer.*;
+
 public class Team implements Subject {
 
 	private ArrayList<Observer> observers;

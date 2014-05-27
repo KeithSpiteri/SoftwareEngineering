@@ -1,5 +1,8 @@
 import java.awt.Color;
 
+import factory.*;
+import observer.*;
+
 public class Player implements Observer {
 	Position position;
 

@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.io.*;
 import java.util.*;
 
+import factory.*;
+import observer.*;
+
 public class Game {
 
 	static boolean testing = false;
