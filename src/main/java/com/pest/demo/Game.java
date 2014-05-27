@@ -75,7 +75,6 @@ public class Game {
 				number_Of_Teams = sc.nextInt();
 			}
 			splitTeams(number_Of_Teams);
-			printTeams();
 			// map.generate();
 
 		}
@@ -98,7 +97,8 @@ public class Game {
 							move = 'U';
 						System.out.println();
 					} while (!players[i].move(move) && !testing);
-					((Team) players[i].subject).setTeamTrail(players[i].visited);
+					((Team) players[i].subject)
+							.setTeamVisited(players[i].visited);
 				} else
 					wins++;
 				generateHTMLFiles();
@@ -226,17 +226,4 @@ public class Game {
 		} catch (Exception ex) {
 		}
 	}
-
-	// To
-	// remove####################################################################################################################################################################################################################
-
-	public void printTeams() {
-		int te = 0;
-		for (Team t : teams) {
-			te++;
-			System.out.println("Team " + te + " has " + t.getObservers().size()
-					+ " players!");
-		}
-	}
-
 }
