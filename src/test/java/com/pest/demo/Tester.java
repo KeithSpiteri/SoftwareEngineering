@@ -12,8 +12,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.com.pest.demo.observer;
-import main.java.com.pest.demo.factory;
+import main.java.com.pest.demo.observer.Observer;
+import main.java.com.pest.demo.observer.Subject;
+import main.java.com.pest.demo.factory.Map;
+import main.java.com.pest.demo.factory.MapCreator;
+import main.java.com.pest.demo.factory.SafeMap;
+import main.java.com.pest.demo.factory.HazardousMap;
+import main.java.com.pest.demo.factory.SafeMapCreator;
+import main.java.com.pest.demo.factory.HazardousMapCreator;
 
 public class Tester {
 
