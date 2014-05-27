@@ -25,6 +25,7 @@ public class Tester {
 		m = creator.generate(1, 5);
 		p = new Player(m);
 		m.setTesting(true);
+		assertEquals(m.isTesting(),true);
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
@@ -249,7 +250,7 @@ public class Tester {
 		
 		((Team)g.players[0].subject).setTeamVisited(g.players[0].visited);
 		
-		boolean test = ((Arrays.deepEquals(g.players[0].visited,g.players[1].visited))||(Arrays.deepEquals(g.players[0].visited,g.players[2].visited))||(Arrays.deepEquals(g.players[0].visited,g.players[3].visited)));
+		boolean test = ((Arrays.deepEquals(g.players[0].visited,g.players[1].visited))|(Arrays.deepEquals(g.players[0].visited,g.players[2].visited))|(Arrays.deepEquals(g.players[0].visited,g.players[3].visited)));
 		
 		assertEquals(true,test);
 		

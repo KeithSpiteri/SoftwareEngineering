@@ -10,10 +10,6 @@ public class Team implements Subject {
 		this.observers = new ArrayList<Observer>();
 	}
 
-	public ArrayList<Observer> getPlayers() {
-		return observers;
-	}
-
 	@Override
 	public void register(Observer obs) {
 		observers.add(obs);
@@ -41,9 +37,5 @@ public class Team implements Subject {
 		this.visited = vis;
 		this.moved = true;
 		notifyObservers();
-	}
-
-	public ArrayList<Observer> getObservers() {
-		return this.observers;
 	}
 }

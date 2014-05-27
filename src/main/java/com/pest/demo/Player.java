@@ -90,7 +90,7 @@ public class Player implements Observer {
 
 		}
 
-		updateTrail(position);
+		updateVisited(position);
 		return true;
 	}
 
@@ -156,7 +156,7 @@ public class Player implements Observer {
 		}
 	}
 
-	public void updateTrail(Position p)
+	public void updateVisited(Position p)
 	{
 		visited[p.getX()][p.getY()] = true;
 	}

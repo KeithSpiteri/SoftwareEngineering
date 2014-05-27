@@ -11,8 +11,7 @@ public abstract class Map {
 
 	public static Color grid[][];
 
-	public void generate() {
-	}
+	abstract void generate();
 
 	public int getSize() {
 		return size;
