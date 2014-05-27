@@ -12,6 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import main.java.com.pest.demo.observer;
+import main.java.com.pest.demo.factory;
+
 public class Tester {
 
 	Player p;
