@@ -1,229 +1,257 @@
+import static org.junit.Assert.*;
+
 import java.awt.Color;
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
-public class Game {
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-	static boolean testing = false;
+public class Tester {
 
-	static int num_play;
-
-	Map map;
-
+	Player p;
+	Map m;
+	Game g;
 	MapCreator creator;
-	static Game g;
-	Player[] players;
-	Team[] teams;
 
-	public static void main(String args[]) {
-		System.out.println("Brian's pro version");
-		if (!testing) {
-			g = new Game();
-			g.startGame();
-		}
+	@Before
+	public void setup() {
+		creator = new MapCreator();
+		m = creator.generate(1, 5);
+		p = new Player(m);
+		m.setTesting(true);
+		Game.num_play = 4;
+		g = new Game();
+		g.setNumPlayers(4);
+
+		m.setTesting(true);
+		m.setSize(5);
+		assertEquals(true, g.setMapSize(5));
 	}
 
-	void startGame() {
+	@Test
+	public void startTest() {
+		assertEquals(true, p.setStartPosition(5));
+		assertEquals(false, p.setStartPosition(55));
+		assertEquals(false, p.setStartPosition(4));
+	}
 
-		Scanner sc = new Scanner(System.in);
+	@Test
+	public void setPos() {
+		Position pos = new Position(0, 0);
+		Map.grid[0][0] = Color.YELLOW;
+		assertEquals(true, p.setPosition(pos));
+	}
 
-		if (!testing) {
-			creator = new MapCreator();
-			int map_type = 0;
-			int map_size;
+	@Test
+	public void moveTest() {
+		p.setFixedStart(2);
+		// p.start_pos = new Position(2,2);
+		p.reset = false;
+		assertEquals(true, p.move('U'));
+		p.reset = true;
+		p.move('U');
+		Position newP = new Position(0, 0);
+		p.position = newP;
+		assertEquals(false, p.move('U'));
 
-			System.out.print("Choose Map Type: (1)Safe, (2)Hazardous: ");
+		// p.setStartPosition(5);
+		p.setFixedStart(2);
+		// p.start_pos = new Position(2,2);
+		p.reset = false;
+		assertEquals(true, p.move('L'));
+		p.reset = true;
+		p.move('L');
+		newP = new Position(0, 0);
+		p.position = newP;
+		assertEquals(false, p.move('L'));
 
-			if (!testing)
-				map_type = sc.nextInt();
-			do {
-				System.out.print("Enter number of players (2-8): ");
-				if (!testing)
-					num_play = sc.nextInt();
-			} while (!g.setNumPlayers(num_play));
+		// p.setStartPosition(5);
+		p.setFixedStart(2);
+		// p.start_pos = new Position(2,2);
+		p.reset = false;
+		assertEquals(true, p.move('R'));
+		p.reset = true;
+		p.move('R');
+		newP = new Position(4, 0);
+		p.position = newP;
+		assertEquals(false, p.move('R'));
 
-			do {
-				if (num_play < 5)
-					System.out.print("Enter Square Map Size (5x5 - 50x50): ");
-				else
-					System.out.print("Enter Square Map Size (8x8 - 50x50): ");
+		// p.setStartPosition(5);
+		p.setFixedStart(2);
+		// p.start_pos = new Position(2,2);
+		p.reset = false;
+		assertEquals(true, p.move('D'));
+		p.reset = true;
+		p.move('D');
+		newP = new Position(0, 4);
+		p.position = newP;
+		assertEquals(false, p.move('D'));
+	}
 
-				map_size = sc.nextInt();
-			} while (!setMapSize(map_size));
+	@Test
+	public void getPosTest() {
+		Position newP = new Position(0, 0);
+		p.position = newP;
 
-			char collaborative_op = ' ';
-			do {
-				System.out
-						.println("Would you like to play in collaborative mode? (y/n)");
-				collaborative_op = (char) sc.next().charAt(0);
-			} while (!(collaborative_op == 'y' || collaborative_op == 'Y'
-					|| collaborative_op == 'n' || collaborative_op == 'N'));
+		assertEquals(newP, p.getPosition());
+	}
 
-			players = new Player[num_play];
+	// MAP
 
-			map = creator.generate(map_type, map_size);
+	@Test
+	public void setMapSize() {
+		boolean test = false;
+		Game.num_play = 4;
+		for (int i = 5; i < 51; i++) {
+			test = g.setMapSize(i);
+			assertEquals(true, test);
+		}
 
-			for (int i = 0; i < num_play; i++) {
-				players[i] = new Player(map);
-				players[i].setStartPosition(map.getSize());
+		Game.num_play = 8;
+		test = g.setMapSize(5);
+		assertEquals(false, test);
+
+	}
+
+	@Test
+	public void generate() {
+		m.setSize(5);
+		m = creator.generate(2, 5);
+		// assertEquals(true, m.generate());
+	}
+
+	// Position
+
+	Position pos;
+
+	@Before
+	public void before() {
+
+		pos = new Position(0, 5);
+	}
+
+	@Test
+	public void xyTest() {
+		assertEquals(pos.x, 0);
+	}
+
+	@Test
+	public void testSetandGet() {
+		int x = 10;
+		int y = 2;
+		Position b = new Position(10, 2);
+
+		int value = b.getX();
+		assertEquals(value, x);
+
+		value = b.getY();
+		assertEquals(value, y);
+
+	}
+
+	@Test
+	public void testDefaultCreator() {
+		m = creator.generate(5);
+	}
+
+	// Game
+
+	@Test
+	public void testSetNumPlayers() {
+		for (int i = 2; i < 9; i++) {
+			assertEquals(true, g.setNumPlayers(i));
+		}
+		assertEquals(false, g.setNumPlayers(9));
+		assertEquals(false, g.setNumPlayers(1));
+	}
+
+	@Test
+	public void testMain() {
+		Game.testing = true;
+		Game.main(new String[0]);
+	}
+
+	/*
+	 * @Test public void testStart() { Game.testing = true; Game.num_play = 2;
+	 * Game game= new Game(); game.map.testing = true; game.setMapSize(5);
+	 * game.map = creator.generate(2,5); game.map.generate(); game.startGame();
+	 * Game.testing = false; }
+	 */
+
+	@Test
+	public void generateHTMLTest() throws IOException {
+		g = new Game();
+		Game.num_play = 4;
+		g.map = creator.generate(2, 5);
+		// g.map.size = 5;
+		// map.generate();
+
+		g.players = new Player[4];
+		g.players[0] = new Player(g.map);
+		g.players[0].setFixedStart(2);
+		g.players[1] = new Player(g.map);
+		g.players[1].setFixedStart(2);
+		g.players[2] = new Player(g.map);
+		g.players[2].setFixedStart(2);
+		g.players[3] = new Player(g.map);
+		g.players[3].setFixedStart(2);
+
+		g.splitTeams(2);
+
+		assertEquals(g.teams.length, 2);
+
+		for (int i = 0; i < Map.grid.length; i++) {
+			for (int j = 0; j < Map.grid.length; j++) {
+				Map.grid[i][j] = Color.GREEN;
 			}
-
-			int number_Of_Teams = 1;
-
-			if (collaborative_op == 'y' || collaborative_op == 'Y') {
-				System.out.println("Enter number of teams");
-				number_Of_Teams = sc.nextInt();
-			}
-			splitTeams(number_Of_Teams);
-			// map.generate();
-
 		}
 
-		// Starting Game Loop
+		for (int i = 0; i < g.players.length; i++) {
+			Map.grid[g.players[i].position.x][g.players[i].position.y - 1] = Color.BLUE;
+			g.players[i].move('u');
+			Map.grid[g.players[i].position.x + 1][g.players[i].position.y] = Color.GREEN;
+			g.players[i].move('r');
+			Map.grid[g.players[i].position.x][g.players[i].position.y + 1] = Color.YELLOW;
+			g.players[i].move('d');
+		}
 
-		char move = 'a';
-		int wins;
-		do {
-			wins = 0;
-			for (int i = 0; i < players.length; i++) {
-				if (!players[i].reached_end && !testing) {
+		g.generateHTMLFiles();
 
-					do {
-						System.out.print("Player " + (i + 1)
-								+ " choose a direction (U, D, L, R): ");
-						if (!testing)
-							move = sc.next().charAt(0);
-						else
-							move = 'U';
-						System.out.println();
-					} while (!players[i].move(move) && !testing);
-					((Team) players[i].subject)
-							.setTeamVisited(players[i].visited);
-				} else
-					wins++;
-				generateHTMLFiles();
-			}
-		} while (wins < players.length);
+		File file1 = new File("map_player_1.html");
+		File file2 = new File("map_player_1.html");
 
-		System.out.println("Congratulations ! All players have found the Ruby");
-
-		sc.close();
-
+		assertEquals(file1, file2);
 	}
 
-	boolean setNumPlayers(int n) {
-		if (n < 2 || n > 8)
-			return false;
-
-		return true;
-	}
-
-	boolean setMapSize(int x) {
-		System.out.println(num_play);
-		System.out.println(x);
-		if (num_play >= 2 && num_play <= 4) {
-			if (x < 5 || x > 50)
-				return false;
-		} else {
-			if (x < 8 || x > 50)
-				return false;
-		}
-		// size = x;
-		return true;
-	}
-
-	void splitTeams(int totTeams) {
-		teams = new Team[totTeams];
-		for (int i = 0; i < totTeams; i++) {
-			teams[i] = new Team();
-		}
-
-		ArrayList<Player> temp = new ArrayList<Player>(Arrays.asList(players));
-		int team = 0;
-
-		while (temp.size() > 0) {
-			int nxtPlayer = (int) (Math.random() * (temp.size() - 1));
-
-			/*
-			 * if (players[nxtPlayer] == null) System.out.println("null");
-			 * 
-			 * if (temp.get(nxtPlayer) == null) System.out.println("null");
-			 */
-
-			teams[team].register(temp.get(nxtPlayer));
-			temp.get(nxtPlayer).setSubject(teams[team]);
-			temp.remove(nxtPlayer);
-
-			team++;
-			if (team == totTeams)
-				team = 0;
-		}
-	}
-
-	void generateHTMLFiles() {
-		try {
-
-			for (int i = 0; i < players.length; i++) {
-
-				FileWriter fWriter = null;
-				BufferedWriter writer = null;
-				fWriter = new FileWriter("map_" + "player_" + (i + 1) + ".html");
-				writer = new BufferedWriter(fWriter);
-
-				writer.write("<html>\n<body>\n<table style=\"border-collapse: collapse;\">\n<tbody>\n");
-
-				Color[][] tiles = map.grid;
-
-				for (int j = 0; j < tiles.length; j++) {
-					writer.write("<tr>\n");
-					for (int k = 0; k < tiles.length; k++) {
-						Position currentPosition = players[i].getPosition();
-
-						Color color = tiles[k][j];
-						String hex = "#"
-								+ Integer.toHexString(color.getRGB())
-										.substring(2);
-						// writer.write("<td style=\"background-color:" + hex +
-						// ";width:50px;height:50px;border:1px solid black;" +
-						// "\">\n");
-						int pixels = (49 * j) + 8;
-
-						if (players[i].visited[k][j] == true
-								|| (j == currentPosition.y && k == currentPosition.x)) {
-							writer.write("<td style=\"background-color:"
-									+ hex
-									+ ";width:50px;height:50px;border:1px solid black;"
-									+ "\">\n");
-							if (color == Color.YELLOW)
-								writer.write("<img src=\"images/diamond.png\" width=\"53px\" height=\"55px\" style=\"z-index:2;position:absolute;top:"
-										+ pixels + "px;\">");
-						} else {
-							Color c = Color.GRAY;
-							String h = "#"
-									+ Integer.toHexString(c.getRGB())
-											.substring(2);
-							writer.write("<td style=\"background-color:"
-									+ h
-									+ ";width:50px;height:50px;border:1px solid black;"
-									+ "\">\n");
-						}
-
-						if (j == currentPosition.y && k == currentPosition.x) {
-							pixels = (50 * j) + 10;
-							if (!players[i].reached_end)
-								writer.write("<img src=\"images/face.png\" width=\"50px\" height=\"50px\" style=\"z-index:2;position:absolute;top:"
-										+ pixels + "px;\">");
-						}
-
-						writer.write("</td>\n");
-					}
-					writer.write("</tr>\n");
-				}
-				writer.write("</tbody>\n</table>\n</body>\n</html>\n");
-				writer.close();
-			}
-
-		} catch (Exception ex) {
-		}
+	@Test
+	public void teamMove() {
+		g.num_play = 4;
+		
+		g.players = new Player[4];
+		g.players[0] = new Player(g.map);
+		g.players[0].setFixedStart(2);
+		g.players[1] = new Player(g.map);
+		g.players[1].setFixedStart(2);
+		g.players[2] = new Player(g.map);
+		g.players[2].setFixedStart(2);
+		g.players[3] = new Player(g.map);
+		g.players[3].setFixedStart(2);
+		
+		g.splitTeams(2);
+		
+		g.players[0].move('u');
+		
+		((Team)g.players[0].subject).setTeamVisited(g.players[0].visited);
+		
+		boolean test = ((Arrays.deepEquals(g.players[0].visited,g.players[1].visited))||(Arrays.deepEquals(g.players[0].visited,g.players[2].visited))||(Arrays.deepEquals(g.players[0].visited,g.players[3].visited)));
+		
+		assertEquals(true,test);
+		
 	}
 }
