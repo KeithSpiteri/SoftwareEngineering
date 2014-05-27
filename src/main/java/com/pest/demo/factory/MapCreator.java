@@ -1,4 +1,4 @@
-package factory;
+package main.java.com.pest.demo.factory;
 
 public class MapCreator {
 

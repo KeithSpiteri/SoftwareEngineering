@@ -1,7 +1,8 @@
 import java.awt.Color;
 
-import factory.*;
-import observer.*;
+import main.java.com.pest.demo.factory.Map;
+import main.java.com.pest.demo.observer.Observer;
+import main.java.com.pest.demo.observer.Subject;
 
 public class Player implements Observer {
 	Position position;

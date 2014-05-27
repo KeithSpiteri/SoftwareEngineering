@@ -1,7 +1,3 @@
-import factory.*;
-import observer.*;
-
-
 public class Position {
 	int x;
 	int y;

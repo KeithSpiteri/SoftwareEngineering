@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-import factory.*;
-import observer.*;
+import main.java.com.pest.demo.observer.Observer;
+import main.java.com.pest.demo.observer.Subject;
 
 public class Team implements Subject {
 

@@ -1,4 +1,4 @@
-package observer;
+package main.java.com.pest.demo.observer;
 
 public interface Subject {
 

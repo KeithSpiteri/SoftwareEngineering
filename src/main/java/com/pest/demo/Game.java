@@ -2,8 +2,9 @@ import java.awt.Color;
 import java.io.*;
 import java.util.*;
 
-import factory.*;
-import observer.*;
+import main.java.com.pest.demo.factory.Map;
+import main.java.com.pest.demo.factory.MapCreator;
+
 
 public class Game {
 
