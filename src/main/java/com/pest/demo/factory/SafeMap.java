@@ -1,12 +1,9 @@
 package main.java.com.pest.demo.factory;
 
 import java.awt.Color;
-
 public class SafeMap extends Map {
 
 	public int map_type = 1;
-
-	// Color grid[][];
 
 	private SafeMap(int size) {
 		super.size = size;

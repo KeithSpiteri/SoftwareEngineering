@@ -160,11 +160,10 @@ public class Player implements Observer {
 		}
 	}
 
-	public void updateVisited(Position p)
-	{
+	public void updateVisited(Position p) {
 		visited[p.getX()][p.getY()] = true;
 	}
-	
+
 	@Override
 	public void update() {
 		visited = (boolean[][]) subject.getUpdate(this);

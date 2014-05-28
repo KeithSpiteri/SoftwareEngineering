@@ -7,7 +7,6 @@ public class HazardousMap extends Map {
 	public int map_type = 2;
 
 	private HazardousMap(int size) {
-		System.out.println("constructing a hazardous map");
 		super.size = size;
 		this.generate();
 	}
@@ -39,7 +38,7 @@ public class HazardousMap extends Map {
 			int x = (int) (Math.random() * getSize());
 			int y = (int) (Math.random() * getSize());
 
-			if (testing) {
+			if (!testing) {
 				if (grid[x][y] == Color.BLUE) {
 					i--;
 				} else {

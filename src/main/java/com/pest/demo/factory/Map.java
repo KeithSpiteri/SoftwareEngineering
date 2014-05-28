@@ -4,10 +4,10 @@ import java.awt.Color;
 
 public abstract class Map {
 
+	protected static Map map = null;
+
 	public int map_type = 0;
 	public int size;
-
-	protected static Map map = null;
 
 	protected boolean testing = false;
 

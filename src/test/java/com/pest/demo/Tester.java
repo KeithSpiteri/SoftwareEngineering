@@ -34,7 +34,7 @@ public class Tester {
 		m = creator.generate(1, 5);
 		p = new Player(m);
 		m.setTesting(true);
-		assertEquals(m.isTesting(),true);
+		assertEquals(m.isTesting(), true);
 		Game.num_play = 4;
 		g = new Game();
 		g.setNumPlayers(4);
@@ -61,7 +61,7 @@ public class Tester {
 	@Test
 	public void moveTest() {
 		p.setFixedStart(2);
-		// p.start_pos = new Position(2,2);
+
 		p.reset = false;
 		assertEquals(true, p.move('U'));
 		p.reset = true;
@@ -70,9 +70,7 @@ public class Tester {
 		p.position = newP;
 		assertEquals(false, p.move('U'));
 
-		// p.setStartPosition(5);
 		p.setFixedStart(2);
-		// p.start_pos = new Position(2,2);
 		p.reset = false;
 		assertEquals(true, p.move('L'));
 		p.reset = true;
@@ -81,9 +79,7 @@ public class Tester {
 		p.position = newP;
 		assertEquals(false, p.move('L'));
 
-		// p.setStartPosition(5);
 		p.setFixedStart(2);
-		// p.start_pos = new Position(2,2);
 		p.reset = false;
 		assertEquals(true, p.move('R'));
 		p.reset = true;
@@ -92,9 +88,7 @@ public class Tester {
 		p.position = newP;
 		assertEquals(false, p.move('R'));
 
-		// p.setStartPosition(5);
 		p.setFixedStart(2);
-		// p.start_pos = new Position(2,2);
 		p.reset = false;
 		assertEquals(true, p.move('D'));
 		p.reset = true;
@@ -133,7 +127,6 @@ public class Tester {
 	public void generate() {
 		m.setSize(5);
 		m = creator.generate(2, 5);
-		// assertEquals(true, m.generate());
 	}
 
 	// Position
@@ -187,20 +180,11 @@ public class Tester {
 		Game.main(new String[0]);
 	}
 
-	/*
-	 * @Test public void testStart() { Game.testing = true; Game.num_play = 2;
-	 * Game game= new Game(); game.map.testing = true; game.setMapSize(5);
-	 * game.map = creator.generate(2,5); game.map.generate(); game.startGame();
-	 * Game.testing = false; }
-	 */
-
 	@Test
 	public void generateHTMLTest() throws IOException {
 		g = new Game();
 		Game.num_play = 4;
 		g.map = creator.generate(2, 5);
-		// g.map.size = 5;
-		// map.generate();
 
 		g.players = new Player[4];
 		g.players[0] = new Player(g.map);
@@ -242,7 +226,7 @@ public class Tester {
 	@Test
 	public void teamMove() {
 		g.num_play = 4;
-		
+
 		g.players = new Player[4];
 		g.players[0] = new Player(g.map);
 		g.players[0].setFixedStart(2);
@@ -252,16 +236,20 @@ public class Tester {
 		g.players[2].setFixedStart(2);
 		g.players[3] = new Player(g.map);
 		g.players[3].setFixedStart(2);
-		
+
 		g.splitTeams(2);
-		
+
 		g.players[0].move('u');
-		
-		((Team)g.players[0].subject).setTeamVisited(g.players[0].visited);
-		
-		boolean test = ((Arrays.deepEquals(g.players[0].visited,g.players[1].visited))|(Arrays.deepEquals(g.players[0].visited,g.players[2].visited))|(Arrays.deepEquals(g.players[0].visited,g.players[3].visited)));
-		
-		assertEquals(true,test);
-		
+
+		((Team) g.players[0].subject).setTeamVisited(g.players[0].visited);
+
+		boolean test = ((Arrays.deepEquals(g.players[0].visited,
+				g.players[1].visited))
+				| (Arrays
+						.deepEquals(g.players[0].visited, g.players[2].visited)) | (Arrays
+				.deepEquals(g.players[0].visited, g.players[3].visited)));
+
+		assertEquals(true, test);
+
 	}
 }

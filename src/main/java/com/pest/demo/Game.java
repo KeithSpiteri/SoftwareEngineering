@@ -20,7 +20,6 @@ public class Game {
 	Team[] teams;
 
 	public static void main(String args[]) {
-		System.out.println("Brian's pro version");
 		if (!testing) {
 			g = new Game();
 			g.startGame();
@@ -67,6 +66,8 @@ public class Game {
 
 			map = creator.generate(map_type, map_size);
 
+			generateHTMLFiles();
+
 			for (int i = 0; i < num_play; i++) {
 				players[i] = new Player(map);
 				players[i].setStartPosition(map.getSize());
@@ -77,10 +78,9 @@ public class Game {
 			if (collaborative_op == 'y' || collaborative_op == 'Y') {
 				System.out.println("Enter number of teams");
 				number_Of_Teams = sc.nextInt();
-			}
+			} else
+				number_Of_Teams = num_play;
 			splitTeams(number_Of_Teams);
-			// map.generate();
-
 		}
 
 		// Starting Game Loop
@@ -123,8 +123,6 @@ public class Game {
 	}
 
 	boolean setMapSize(int x) {
-		System.out.println(num_play);
-		System.out.println(x);
 		if (num_play >= 2 && num_play <= 4) {
 			if (x < 5 || x > 50)
 				return false;
@@ -132,7 +130,6 @@ public class Game {
 			if (x < 8 || x > 50)
 				return false;
 		}
-		// size = x;
 		return true;
 	}
 
@@ -147,12 +144,6 @@ public class Game {
 
 		while (temp.size() > 0) {
 			int nxtPlayer = (int) (Math.random() * (temp.size() - 1));
-
-			/*
-			 * if (players[nxtPlayer] == null) System.out.println("null");
-			 * 
-			 * if (temp.get(nxtPlayer) == null) System.out.println("null");
-			 */
 
 			teams[team].register(temp.get(nxtPlayer));
 			temp.get(nxtPlayer).setSubject(teams[team]);
@@ -187,9 +178,7 @@ public class Game {
 						String hex = "#"
 								+ Integer.toHexString(color.getRGB())
 										.substring(2);
-						// writer.write("<td style=\"background-color:" + hex +
-						// ";width:50px;height:50px;border:1px solid black;" +
-						// "\">\n");
+
 						int pixels = (49 * j) + 8;
 
 						if (players[i].visited[k][j] == true
